@@ -23,6 +23,16 @@ const models = join(__dirname, 'app/models');
 const port = process.env.PORT || 3000;
 const app = express();
 
+if(process.env.APPINSIGHTS_INSTRUMENTATIONKEY!=null){
+  console.log(`Adding app insights with instrumentation key ${process.env.APPINSIGHTS_INSTRUMENTATIONKEY}`);
+  const appInsights = require("applicationinsights");
+  appInsights.setup();
+  appInsights.start();
+}
+else{
+  console.warn("APPINSIGHTS_INSTRUMENTATIONKEY not set, instrumentation disabled");
+}
+
 /**
  * Expose
  */
