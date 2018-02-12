@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+const os = require("os");
 
 const mongoose = require('mongoose');
 const { wrap: async } = require('co');
@@ -47,7 +48,8 @@ exports.index = async(function* (req, res) {
     title: 'Articles',
     articles: articles,
     page: page + 1,
-    pages: Math.ceil(count / limit)
+    pages: Math.ceil(count / limit),
+    servername:os.hostname()
   });
 });
 

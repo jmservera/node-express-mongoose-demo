@@ -1,8 +1,8 @@
 version: '3'
 services:
   frontend:
-    build:
-      context: .
+  # we use local registry for testing https://linuxconfig.org/how-to-run-your-own-local-private-docker-registry
+    image: localhost:5000/nemd:1
     command: npm start
     depends_on:
       - mongodb
