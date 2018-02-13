@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: frontend
+  name: frontend
+spec:
+  containers:
+  - args:
+    - npm
+    - start
+    env:
+    - name: APPINSIGHTS_INSTRUMENTATIONKEY
+      valueFrom:
+        configMapKeyRef:
+          key: APPINSIGHTS_INSTRUMENTATIONKEY
+          name: frontend-env
+    - name: BASEURL
+      valueFrom:
+        configMapKeyRef:
+          key: BASEURL
+          name: frontend-env
+    - name: FACEBOOK_CLIENTID
+      valueFrom:
+        configMapKeyRef:
+          key: FACEBOOK_CLIENTID
+          name: frontend-env
+    - name: FACEBOOK_SECRET
+      valueFrom:
+        configMapKeyRef:
+          key: FACEBOOK_SECRET
+          name: frontend-env
+    - name: GITHUB_CLIENTID
+      valueFrom:
+        configMapKeyRef:
+          key: GITHUB_CLIENTID
+          name: frontend-env
+    - name: GITHUB_SECRET
+      valueFrom:
+        configMapKeyRef:
+          key: GITHUB_SECRET
+          name: frontend-env
+    - name: GOOGLE_CLIENTID
+      valueFrom:
+        configMapKeyRef:
+          key: GOOGLE_CLIENTID
+          name: frontend-env
+    - name: GOOGLE_SECRET
+      valueFrom:
+        configMapKeyRef:
+          key: GOOGLE_SECRET
+          name: frontend-env
+    - name: IMAGER_S3_BUCKET
+      valueFrom:
+        configMapKeyRef:
+          key: IMAGER_S3_BUCKET
+          name: frontend-env
+    - name: IMAGER_S3_KEY
+      valueFrom:
+        configMapKeyRef:
+          key: IMAGER_S3_KEY
+          name: frontend-env
+    - name: IMAGER_S3_SECRET
+      valueFrom:
+        configMapKeyRef:
+          key: IMAGER_S3_SECRET
+          name: frontend-env
+    - name: LINKEDIN_CLIENTID
+      valueFrom:
+        configMapKeyRef:
+          key: LINKEDIN_CLIENTID
+          name: frontend-env
+    - name: LINKEDIN_SECRET
+      valueFrom:
+        configMapKeyRef:
+          key: LINKEDIN_SECRET
+          name: frontend-env
+    - name: MONGOHQ_URL
+      valueFrom:
+        configMapKeyRef:
+          key: MONGOHQ_URL
+          name: frontend-env
+    - name: TWITTER_CLIENTID
+      valueFrom:
+        configMapKeyRef:
+          key: TWITTER_CLIENTID
+          name: frontend-env
+    - name: TWITTER_SECRET
+      valueFrom:
+        configMapKeyRef:
+          key: TWITTER_SECRET
+          name: frontend-env
+    image: frontend
+    name: frontend
+    resources: {}
+  restartPolicy: OnFailure
+status: {}
