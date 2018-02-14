@@ -1,0 +1,68 @@
+# deploy in docker swarm mode with
+# docker stack deploy --compose-file=docker-compose.azure.yml prod --with-registry-auth
+#  * Remember to activate one head node
+#  * Login in the registry
+#  * ports have to be published for the haproxy to work
+version: '3'
+services:
+  frontend:
+  # we use azure registry for deployment, you will need to do a docker login juanserv.azurecr.io --username juanserv --password *****
+  # then you can update with docker service update --image juanserv.azurecr.io/nemd:2 --with-registry-auth prod_frontend
+    image: juanserv.azurecr.io/nemd:1
+    command: npm start
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    environment:
+      - MONGOHQ_URL=mongodb://mongodb/nodedemo_prod
+      - BASEURL=http://localhost
+      - SERVICE_PORTS=3000
+      - NODE_ENV=production
+    networks: 
+      - nemnetwork
+    ports:
+      - 3000:3000
+    deploy:
+      replicas: 3
+      update_config: 
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints: [node.role != manager]
+# using proxy as in https://medium.com/@nirgn/load-balancing-applications-with-haproxy-and-docker-d719b7c5b231
+  proxy:
+    image: dockercloud/haproxy:latest
+    depends_on:
+      - frontend
+    environment:
+      - BALANCE=leastconn
+      - DOCKER_HOST
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - nemnetwork
+    links:
+      - frontend
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+  mongodb:
+    image: mongo:latest
+    command: --smallfiles
+    deploy:
+      placement:
+        constraints: [node.role != manager]
+    ports:
+      - 27017:27017
+    networks:
+      - nemnetwork
+networks:
+  nemnetwork:
+    driver: overlay
