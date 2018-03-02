@@ -1,0 +1,75 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "agentpublicCount": {
+      "value": 3
+    },
+    "agentpublicEndpointDNSNamePrefix": {
+      "value": "jmserverapublic"
+    },
+    "agentpublicSubnet": {
+      "value": "10.0.0.0/16"
+    },
+    "agentpublicVMSize": {
+      "value": "Standard_D2_v2"
+    },
+    "agentpublicosImageOffer": {
+      "value": "UbuntuServer"
+    },
+    "agentpublicosImagePublisher": {
+      "value": "Canonical"
+    },
+    "agentpublicosImageSKU": {
+      "value": "16.04-LTS"
+    },
+    "agentpublicosImageVersion": {
+      "value": "16.04.201801050"
+    },
+    "dockerComposeDownloadURL": {
+      "value": "https://github.com/docker/compose/releases/download"
+    },
+    "dockerEngineDownloadRepo": {
+      "value": "https://aptdocker.azureedge.net/repo"
+    },
+    "firstConsecutiveStaticIP": {
+      "value": "172.16.0.5"
+    },
+    "fqdnEndpointSuffix": {
+      "value": "cloudapp.azure.com"
+    },
+    "linuxAdminUsername": {
+      "value": "azureuser"
+    },
+    "location": {
+      "value": "northeurope"
+    },
+    "masterEndpointDNSNamePrefix": {
+      "value": "jmserveraswarm"
+    },
+    "masterSubnet": {
+      "value": "172.16.0.0/24"
+    },
+    "masterVMSize": {
+      "value": "Standard_D2_v2"
+    },
+    "osImageOffer": {
+      "value": "UbuntuServer"
+    },
+    "osImagePublisher": {
+      "value": "Canonical"
+    },
+    "osImageSKU": {
+      "value": "16.04-LTS"
+    },
+    "osImageVersion": {
+      "value": "16.04.201801050"
+    },
+    "sshRSAPublicKey": {
+      "value": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAt0KO54pf/hI8Ix0StbCvpn8xm1EakIVtS19VM9C9c3OOdTHIet7a/erIIpVUwlOyFwPr0OyDYLEZZVtTQoLIeppHX8uevgTAqHmSTNX21q61G3rooPkU5fgDwNTtjZ071seMlVnqKa++aPN73158NpnEEm8BMrxPCy+HjNcMLQSlG/BZ9tr3vUH/YJxCApuVlOovRl8Bvv5hp7fKiPHL8mGXfCKNcOyhzzbAhZpnPIO2Ibl+IVz053D+P0Uv5SKEUMs+MpzenthTR3QpoVrbw3IL6MV34azWB5UAYcbGjMlxlYNqmcLQtUygqEhlD4rcbv0LrNxFyYtfdk/QBM9jSQ== rsa-key-20170525"
+    },
+    "targetEnvironment": {
+      "value": "AzurePublicCloud"
+    }
+  }
+}
